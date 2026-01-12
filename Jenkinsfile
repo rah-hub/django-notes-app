@@ -19,10 +19,12 @@ pipeline{
                 dockerpush("dockerHubCreds","notes-app","latest")
             }
         }
-        stage("Deploy"){
+        stage('Deploy') {
             steps {
-                sh ''' docker run -d -p 8000:8000 --name django-app notes-app:latest '''
-            }
+                echo "This is deploying the code" 
+                // Stop and remove existing container if it exists
+                sh ''' docker rm -f notes-app || true docker run -d -p 8000:8000 --name notes-app notes-app:latest '''
+            } 
         }
         
     }

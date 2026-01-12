@@ -23,7 +23,10 @@ pipeline{
             steps {
                 echo "This is deploying the code" 
                 // Stop and remove existing container if it exists
-                sh ''' docker rm -f notes-app || true docker run -d -p 8000:8000 --name notes-app notes-app:latest '''
+                sh '''
+                docker stop notes-app || true
+                docker rm -f notes-app || true 
+                docker run -d -p 8000:8000 --name notes-app notes-app:latest '''
             } 
         }
         

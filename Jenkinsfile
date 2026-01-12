@@ -20,8 +20,8 @@ pipeline{
             }
         }
         stage("Deploy"){
-            steps{
-                deploy()
+            steps {
+                sh ''' docker run -d -p 8000:8000 --name django-app notes-app:latest '''
             }
         }
         
